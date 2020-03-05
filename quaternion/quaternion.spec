@@ -13,6 +13,7 @@ Source1:    %{appid}.appdata.xml
 BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
+BuildRequires: libappstream-glib
 
 BuildRequires: cmake(Olm)
 BuildRequires: cmake(QtOlm)
