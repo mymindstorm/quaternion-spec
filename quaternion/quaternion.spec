@@ -8,7 +8,6 @@ Summary:    A Qt5-based IM client for Matrix
 License:    GPLv3
 URL:        https://github.com/quotient-im/Quaternion
 Source0:    https://github.com/quotient-im/Quaternion/archive/%{version}.tar.gz
-Source1:    %{appid}.appdata.xml
 
 BuildRequires: gcc-c++
 BuildRequires: cmake
@@ -44,7 +43,7 @@ mkdir -p %{_target_platform}
 %install
 %make_install
 %find_lang %{name} --with-qt
-cp -p %{SOURCE1} %{buildroot}%{_metainfodir}
+cp -p linux/%{appid}.appdata.xml %{buildroot}%{_metainfodir}
 
 %check
 desktop-file-validate %{buildroot}/%{_datadir}/applications/%{appid}.desktop
