@@ -5,12 +5,14 @@ Release:    1%{?dist}
 Summary:    A Qt5-based IM client for Matrix
 License:    GPLv3
 URL:        https://github.com/quotient-im/Quaternion
-Source0:     https://github.com/quotient-im/Quaternion/archive/%{version}.tar.gz
+Source0:    https://github.com/quotient-im/Quaternion/archive/%{version}.tar.gz
 
 BuildRequires: gcc-c++
 BuildRequires: cmake
 
-BuildRequires: cmake(Quotient)
+BuildRequires: cmake(Olm)
+BuildRequires: cmake(QtOlm)
+BuildRequires: cmake(QMatrixClient)
 BuildRequires: cmake(Qt5Widgets)
 BuildRequires: cmake(Qt5Network)
 BuildRequires: cmake(Qt5Quick)
@@ -26,12 +28,12 @@ BuildRequires: cmake(Qt5Keychain)
 Quaternion is a cross-platform desktop IM client for the Matrix protocol.
 
 %prep
-%autosetup
+%autosetup -n Quaternion-%{version}
 mkdir -p %{_target_platform}
 
 %build
-%cmake .. \
-    -DUSE_INTREE_LIBQMC=0
+%cmake \
+    -DUSE_INTREE_LIBQMC=NO
 %make_build
 
 %install
