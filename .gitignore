@@ -1,2 +1,4 @@
 .build-*.log
 Quaternion-*
+x86_64
+*.src.rpm

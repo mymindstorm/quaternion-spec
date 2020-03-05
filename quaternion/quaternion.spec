@@ -1,3 +1,5 @@
+%global appid com.github.quaternion
+
 Name:       quaternion
 Version:    0.0.9.4c
 Release:    1%{?dist}
@@ -6,6 +8,7 @@ Summary:    A Qt5-based IM client for Matrix
 License:    GPLv3
 URL:        https://github.com/quotient-im/Quaternion
 Source0:    https://github.com/quotient-im/Quaternion/archive/%{version}.tar.gz
+Source1:    %{appid}.appdata.xml
 
 BuildRequires: gcc-c++
 BuildRequires: cmake
@@ -40,18 +43,20 @@ mkdir -p %{_target_platform}
 %install
 %make_install
 %find_lang %{name} --with-qt
+cp -p %{SOURCE1} %{buildroot}%{_metainfodir}
 
 %check
-desktop-file-validate %{buildroot}/%{_datadir}/applications/com.github.quaternion.desktop
+desktop-file-validate %{buildroot}/%{_datadir}/applications/%{appid}.desktop
+appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/%{appid}.appdata.xml
 
 %files -f %{name}.lang
 %license COPYING
-%doc README.md BUILDING.md
+%doc README.md
 %{_bindir}/%{name}
-%{_datadir}/applications/com.github.quaternion.desktop
+%{_datadir}/applications/%{appid}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svgz
-%{_datadir}/metainfo/com.github.quaternion.appdata.xml
+%{_metainfodir}/%{appid}.appdata.xml
 
 %changelog
 * Thu Mar 05 2020 Brendan Early <mymindstorm@evermiss.net> - 0.0.9.4c-1.fc31
