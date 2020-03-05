@@ -46,7 +46,7 @@ rm -rf 3rdparty
 pushd %{_target_platform}
     %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
-    -QMATRIXCLIENT_INSTALL_EXAMPLE=OFF \
+    -DQMATRIXCLIENT_INSTALL_EXAMPLE=OFF \
     -DCMAKE_INSTALL_INCLUDEDIR:PATH="include/QMatrixClient" \
     ..
 popd
