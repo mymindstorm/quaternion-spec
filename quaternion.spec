@@ -11,7 +11,14 @@ BuildRequires: gcc-c++
 BuildRequires: cmake
 
 BuildRequires: cmake(Quotient)
-BuildRequires: cmake(Qt5Widgets Qt5Network Qt5Quick Qt5Qml Qt5Gui Qt5LinguistTools Qt5Multimedia Qt5DBus)
+BuildRequires: cmake(Qt5Widgets)
+BuildRequires: cmake(Qt5Network)
+BuildRequires: cmake(Qt5Quick)
+BuildRequires: cmake(Qt5Qml)
+BuildRequires: cmake(Qt5Gui)
+BuildRequires: cmake(Qt5LinguistTools)
+BuildRequires: cmake(Qt5Multimedia)
+BuildRequires: cmake(Qt5DBus)
 BuildRequires: cmake(Qt5QuickWidgets)
 BuildRequires: cmake(Qt5Keychain)
 
@@ -24,8 +31,7 @@ mkdir -p %{_target_platform}
 
 %build
 %cmake .. \
-    -DUSE_INTREE_LIBQMC=0 \
-    # -DCMAKE_INSTALL_PREFIX=%{buildroot}
+    -DUSE_INTREE_LIBQMC=0
 %make_build
 
 %install
