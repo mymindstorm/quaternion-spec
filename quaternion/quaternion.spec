@@ -9,6 +9,7 @@ Source0:    https://github.com/quotient-im/Quaternion/archive/%{version}.tar.gz
 
 BuildRequires: gcc-c++
 BuildRequires: cmake
+BuildRequires: desktop-file-utils
 
 BuildRequires: cmake(Olm)
 BuildRequires: cmake(QtOlm)
@@ -27,6 +28,13 @@ BuildRequires: cmake(Qt5Keychain)
 %description
 Quaternion is a cross-platform desktop IM client for the Matrix protocol.
 
+%package devel
+Summary: Development files for %{name}
+Requires: %{name}%{?_isa} = %{version}-%{release}
+
+%description devel
+%{summary}.
+
 %prep
 %autosetup -n Quaternion-%{version}
 mkdir -p %{_target_platform}
@@ -38,10 +46,24 @@ mkdir -p %{_target_platform}
 
 %install
 %make_install
+%find_lang %{name} --with-qt
 
-%files
-%license
-%doc 
+%check
+desktop-file-validate %{buildroot}/%{_datadir}/applications/com.github.quaternion.desktop
+
+%files -f %{name}.lang
+%license COPYING
+%doc README.md BUILDING.md
+%{_bindir}/%{name}
+%{_datadir}/applications/com.github.quaternion.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svgz
+%{_datadir}/metainfo/com.github.quaternion.appdata.xml
+
+%files devel
+%{_prefix}/lib/debug%{_bindir}/%{name}-%{version}-*.debug
 
 %changelog
-# let's skip this for now
+* Thu Mar 05 2020 Brendan Early <mymindstorm@evermiss.net> - 0.0.9.4c-1.fc31
+- Version 0.9.4c
+
