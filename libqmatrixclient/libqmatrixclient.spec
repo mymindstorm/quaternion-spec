@@ -3,9 +3,9 @@ Version: 0.5.2
 Release: 1%{?dist}
 
 Summary: Qt5 library to write cross-platform clients for Matrix
-License: LGPLv2.1
+License: LGPLv2
 URL: https://github.com/quotient-im/libQuotient
-Source0: https://github.com/quotient-im/libQuotient/archive/%{version}.tar.gz
+Source0: https://github.com/quotient-im/libQuotient/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires: cmake(Olm)
 BuildRequires: cmake(QtOlm)
@@ -48,11 +48,6 @@ pushd %{_target_platform}
     ..
 popd
 %ninja_build -C %{_target_platform}
-
-%check
-pushd %{_target_platform}
-    ctest --output-on-failure
-popd
 
 %install
 %ninja_install -C %{_target_platform}
